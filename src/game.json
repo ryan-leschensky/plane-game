@@ -37,7 +37,7 @@
         {
           "type": "sprite", 
           "name": "aimingDots", 
-          "value": "@onstart()\ndef my_onstart(self):\n    for i in range(120): # repeat code 120 times\n        self.forward(4)\n        self.turn_right(3)\n"
+          "value": "@onstart()\ndef my_onstart(self):\n    while True:\n        self.x_pos = sprite.x_pos + np.cos(globals.angle) * charge\n        self.y_pos = sprite.y_pos + np.sin(globals.angle) * charge"
         }
       ], 
       "images": {}, 
@@ -8090,6 +8090,687 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "8c317ec7", 
       "time": "Fri Sep 12 13:03:59 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:32 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:34 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,3 @@\n @onstart()\n def my_onstart(self):\n-    for i in range(120): # repeat code 120 times\n-        self.forward(4)\n-        self.turn_right(3)\n+    while not \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:40 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:41 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,3 @@\n @onstart()\n def my_onstart(self):\n-    while not \n+    while not globals.\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:44 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:45 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,3 @@\n @onstart()\n def my_onstart(self):\n-    while not globals.\n+    while globals.launching\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:54 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:55 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:57 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,3 @@\n-@onstart()\n+@onstart():\n def my_onstart(self):\n     while globals.launching\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:04:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,3 @@\n-@onstart():\n+@onstart()\n def my_onstart(self):\n     while globals.launching\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:00 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,3 @@\n @onstart()\n def my_onstart(self):\n-    while globals.launching\n+    while globals.launching:\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,3 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n+        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:03 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "aimingDots", 
+        "content": "self.pos = (0, 0)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:04 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:04 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n+        self.pos = (0, 0)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:09 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,3 @@\n def my_onstart(self):\n     while globals.launching:\n         self.pos = (0, 0)\n-        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:15 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n-        self.pos = (0, 0)\n+        sprite.pos = (0, 0)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:19 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:20 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:23 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:31 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "sprite.pos"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n-        sprite.pos = (0, 0)\n+        self.pos = (0, 0)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:36 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n-        self.pos = (0, 0)\n+        self.pos = sprite.pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n-        self.pos = sprite.pos\n+        self.pos = sprite.pos + (5,5)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:05:46 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:02 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:07 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while globals.launching:\n-        self.pos = sprite.pos + (5,5)\n+        self.pos = sprite.pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:16 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n-    while globals.launching:\n+    while True:\n         self.pos = sprite.pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:16 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:17 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:29 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,4 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.pos = sprite.pos\n+        self.pos = sprite.pos.x\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:41 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "aimingDots", 
+        "content": "self.x_pos = 0"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:41 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:41 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,4 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n+        self.x_pos = 0\n         self.pos = sprite.pos.x\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:46 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "aimingDots", 
+        "content": "self.y_pos = 0"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:46 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:46 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,5 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = 0\n+        self.y_pos = 0\n         self.pos = sprite.pos.x\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:52 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -3,4 +3,4 @@\n     while True:\n         self.x_pos = 0\n         self.y_pos = 0\n-        self.pos = sprite.pos.x\n+        self.pos = sprite.x_pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:53 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -3,4 +3,4 @@\n     while True:\n         self.x_pos = 0\n         self.y_pos = 0\n-        self.pos = sprite.x_pos\n+        self.pos = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:54 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,6 +1,6 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = 0\n+        self.x_pos = sprite.x_pos\n         self.y_pos = 0\n         self.pos = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:56 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,5 +2,5 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos\n-        self.y_pos = 0\n+        self.y_pos = sprite.x_pos\n         self.pos = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:57 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -3,4 +3,3 @@\n     while True:\n         self.x_pos = sprite.x_pos\n         self.y_pos = sprite.x_pos\n-        self.pos = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:06:58 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos\n-        self.y_pos = sprite.x_pos\n+        self.y_pos = sprite.y_pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:02 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:06 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:10 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos\n+        self.x_pos = sprite.x_pos + globals.angle\n         self.y_pos = sprite.y_pos\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + globals.angle\n-        self.y_pos = sprite.y_pos\n+        self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:15 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + globals.angle\n+        self.x_pos = sprite.x_pos +  globals.angle\n         self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:07:58 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos +  globals.angle\n+        self.x_pos = sprite.x_pos + math.cos globals.angle\n         self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:08:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + math.cos globals.angle\n+        self.x_pos = sprite.x_pos + np.cos( globals.angle\n         self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:08:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos( globals.angle\n-        self.y_pos = sprite.y_pos + globals.angle\n+    self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:08:03 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos( globals.angle\n-    self.y_pos = sprite.y_pos + globals.angle\n+        self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:08:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + np.cos( globals.angle\n+        self.x_pos = sprite.x_pos + np.cos(globals.angle\n         self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + np.cos(globals.angle\n+        self.x_pos = sprite.x_pos + np.cos(globals.angle)\n         self.y_pos = sprite.y_pos + globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos(globals.angle)\n-        self.y_pos = sprite.y_pos + globals.angle\n+        self.y_pos = sprite.y_pos + np.sin(globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos(globals.angle)\n-        self.y_pos = sprite.y_pos + np.sin(globals.angle\n+        self.y_pos = sprite.y_pos + np.sin(globals.angle)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + np.cos(globals.angle)\n+        self.x_pos = sprite.x_pos + np.cos(globals.angle) * 5\n         self.y_pos = sprite.y_pos + np.sin(globals.angle)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos(globals.angle) * 5\n-        self.y_pos = sprite.y_pos + np.sin(globals.angle)\n+        self.y_pos = sprite.y_pos + np.sin(globals.angle) * 5\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:43 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:54 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:12:56 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:03 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -1,5 +1,5 @@\n @onstart()\n def my_onstart(self):\n     while True:\n-        self.x_pos = sprite.x_pos + np.cos(globals.angle) * 5\n+        self.x_pos = sprite.x_pos + np.cos(globals.angle) * charge\n         self.y_pos = sprite.y_pos + np.sin(globals.angle) * 5\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:10 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -2,4 +2,4 @@\n def my_onstart(self):\n     while True:\n         self.x_pos = sprite.x_pos + np.cos(globals.angle) * charge\n-        self.y_pos = sprite.y_pos + np.sin(globals.angle) * 5\n+        self.y_pos = sprite.y_pos + np.sin(globals.angle) * charge\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:10 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:49 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:13:51 2025", 
       "msg": {
         "type": "ide::save"
       }
