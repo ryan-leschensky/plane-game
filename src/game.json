@@ -37,7 +37,7 @@
         {
           "type": "sprite", 
           "name": "aimingDots", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 20\n    self.pen_color = 'red'\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            stage.clear_drawings()\n            for i in range(1, 6):\n                self.drawing = False\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n                self.pen_size = 20 // (i)\n                self.drawing = True\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n            self.drawing = False\n            self.local_angle = globals.angle;\n            self.local_charge = globals.charge;\n\n        \n\n        \n        "
+          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 20\n    self.pen_color = 'red'\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            stage.clear_drawings()\n            \n            if globals.charge == 0:\n                self.local_angle = globals.angle;\n                self.local_charge = globals.charge;\n                break\n            \n            for i in range(1, 6):\n                self.drawing = False\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n                self.pen_size = 20 // (i)\n                self.drawing = True\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n            self.drawing = False\n            \n            \n\n        \n\n        \n        "
         }
       ], 
       "images": {}, 
@@ -11156,6 +11156,274 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "8c317ec7", 
       "time": "Fri Sep 12 13:38:15 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:38:30 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:38:59 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:15 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,7 @@\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n             self.drawing = False\n+            \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,6 +11,7 @@\n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n+            \n             for i in range(1, 6):\n                 self.drawing = False\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,7 @@\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n+            \n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,7 @@\n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n             \n+            if self.local_charge == 0:\n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,7 @@\n             self.local_charge = globals.charge;\n             \n             if self.local_charge == 0:\n+                stage.clear_drawings()\n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:37 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:39:39 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:01 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:03 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -29,8 +29,7 @@\n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n             \n-            if self.local_charge == 0:\n-                stage.clear_drawings()\n+            \n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:10 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,8 +28,6 @@\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n-            \n-            \n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,6 +11,7 @@\n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n+            \n             \n             for i in range(1, 6):\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:12 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,6 +11,7 @@\n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n+            \n             \n             \n             for i in range(1, 6):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:12 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,7 +12,8 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-            \n+            if self.local_charge == 0:\n+                stage.clear_drawings()\n             \n             for i in range(1, 6):\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:19 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -29,8 +29,7 @@\n                 )\n             self.drawing = False\n             \n-            self.local_angle = globals.angle;\n-            self.local_charge = globals.charge;\n+            \n \n         \n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:21 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -13,7 +13,8 @@\n             stage.clear_drawings()\n             \n             if self.local_charge == 0:\n-                stage.clear_drawings()\n+                self.local_angle = globals.angle;\n+            self.local_charge = globals.charge;\n             \n             for i in range(1, 6):\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:23 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -14,7 +14,7 @@\n             \n             if self.local_charge == 0:\n                 self.local_angle = globals.angle;\n-            self.local_charge = globals.charge;\n+                self.local_charge = globals.charge;\n             \n             for i in range(1, 6):\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:29 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -15,6 +15,7 @@\n             if self.local_charge == 0:\n                 self.local_angle = globals.angle;\n                 self.local_charge = globals.charge;\n+                break\n             \n             for i in range(1, 6):\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:29 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:38 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:48 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,7 +12,7 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-            if self.local_charge == 0:\n+            if globals.charge == 0:\n                 self.local_angle = globals.angle;\n                 self.local_charge = globals.charge;\n                 break\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:48 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:49 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:40:53 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:41:04 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:41:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,6 +12,7 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n+\n             if globals.charge == 0:\n                 self.local_angle = globals.angle;\n                 self.local_charge = globals.charge;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:41:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,7 +12,6 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-\n             if globals.charge == 0:\n                 self.local_angle = globals.angle;\n                 self.local_charge = globals.charge;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "8c317ec7", 
+      "time": "Fri Sep 12 13:41:28 2025", 
       "msg": {
         "type": "ide::save"
       }
