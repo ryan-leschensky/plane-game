@@ -27,12 +27,12 @@
         {
           "type": "stage", 
           "name": "stage", 
-          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        print('mu')\n    \n@onstart()\ndef run(self):\n    step = 1\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(step)\n        \n    "
+          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        print('mu')\n    \n@onstart()\ndef run(self):\n    step = 0.01\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(0.01)\n        \n    "
         }, 
         {
           "type": "sprite", 
           "name": "sprite", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n        "
+          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n    \n    while True:\n        npSpeed = np.array(globals.speed)\n        self.say(npSpeed)\n        \n        angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n        \n        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n            angle = 270 - angle\n        elif (npSpeed[0] < 0):\n            angle = 180 - angle\n        \n        self.heading = angle"
         }
       ], 
       "images": {}, 
@@ -8328,6 +8328,2394 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "b182f335", 
       "time": "Mon Sep 15 11:50:47 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:48 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:16 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:16 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:32 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:43 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:56 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n+            self.say(f\"\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:51:58 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"\"\n+            self.say(f\"{} {}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{} {}\"\n+            self.say(f\"{globals.x} {}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:05 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {}\"\n+            self.say(f\"{globals.x} {globals.y}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {globals.y}\"\n+            self.say(f\"{globals.x} {globals.y}\")\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:11 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:18 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 131, in wrapped\n    fn(*args, **kwargs)\n    ~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 161, in wrapped\n    return f(*args, **kwargs)\n  File \"<stdin>\", line 70, in run\nAttributeError: 'stage' object has no attribute 'say'"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:32 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {globals.y}\")\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:34 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:36 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -22,4 +22,5 @@\n @nb.on_message('launched')\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n+    \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -23,4 +23,5 @@\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n     \n+    while True:\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,3 +25,4 @@\n     \n     while True:\n         \n+        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:40 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n+                    self.say(f\"{globals.x} {globals.y}\")\n+\n         \n-        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-                    self.say(f\"{globals.x} {globals.y}\")\n+                self.say(f\"{globals.x} {globals.y}\")\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-                self.say(f\"{globals.x} {globals.y}\")\n+            self.say(f\"{globals.x} {globals.y}\")\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-            self.say(f\"{globals.x} {globals.y}\")\n+        self.say(f\"{globals.x} {globals.y}\")\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,4 @@\n     \n     while True:\n         self.say(f\"{globals.x} {globals.y}\")\n-\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:46 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:52:48 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:53:23 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:53:26 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:53:47 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:53:47 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:53:50 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:42 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:45 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:47 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "sprite", 
+        "content": "self.heading = 90"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:48 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:48 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,4 +25,5 @@\n     \n     while True:\n         self.say(f\"{globals.x} {globals.y}\")\n+        self.heading = 90\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:54:50 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.say(f\"{globals.x} {globals.y}\")\n         self.heading = 90\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.heading = 90\n+        self.heading = np.array(globals.speed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:01 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:02 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:05 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.heading = np.array(globals.speed)\n+        self.heading = np.array(globals.speed) / \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:09 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.heading = np.array(globals.speed) / \n+        self.heading =  / \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:15 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n+        npSpeed = \n         self.heading =  / \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:15 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        npSpeed = \n+        npSpeed = np.array(globals.speed)\n         self.heading =  / \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:23 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.heading =  / \n+        self.heading = npSpeed / \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.heading = npSpeed / \n+        self.heading = npSpeed / np.\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:28 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.heading = npSpeed / np.\n+        self.heading = npSpeed / np.linalg(\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.heading = npSpeed / np.linalg(\n+        self.heading = npSpeed / np.linalg.norm(npSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.heading = npSpeed / np.linalg.norm(npSpeed)\n+        normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:45 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,4 +26,5 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n+\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,5 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n \n+\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:48 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,6 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n-\n+        \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:49 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,5 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n+        \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,5 +28,4 @@\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n         \n-\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:55:56 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,4 +28,3 @@\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n         \n-        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        \n+        self.heading = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:14 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "sprite", 
+        "content": "self.turn_to(stage.mouse_pos)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:15 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:15 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,5 +26,6 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n+        self.turn_to(stage.mouse_pos)\n         \n         self.heading = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:16 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,5 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n-        self.turn_to(stage.mouse_pos)\n         \n-        self.heading = \n+        self.he\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:18 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "sprite", 
+        "content": "self.heading = 90"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:19 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:19 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,5 +26,6 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n+        self.heading = 90\n         \n         self.he\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:20 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,5 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n-        self.heading = 90\n         \n         self.he\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.he\n+        self.heading = np.arctan()\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan()\n+        self.heading = np.arctan( / )\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan( / )\n+        self.heading = np.arctan(normalizedSpeed / )\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:58 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed / )\n+        self.heading = np.arctan(normalizedSpeed[] / )\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:56:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[] / )\n+        self.heading = np.arctan(normalizedSpeed[1] / )\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / )\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[])\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:12 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:27 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:29 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,5 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n+        \n         self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,5 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n+        self.say(npSpeed)\n         \n         self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:37 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:57:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.say(npSpeed)\n+        self.say(normalizedSpeed)\n         \n         self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:01 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:21 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0])\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * ()\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * ()\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (math.pi / 180)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:26 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:28 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:29 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:58:57 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (math.pi / 180)\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / 180)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / 180)\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:08 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:10 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:36 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:40 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n+        self.heading =  * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading =  * (180 / math.pi)\n+        self.heading = 0 * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:43 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:54 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = 0 * (180 / math.pi)\n+        self.heading =  * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:59:54 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading =  * (180 / math.pi)\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:00 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n+        self.heading = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:00 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = (\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:06 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:21 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:24 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi) + 90\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi) - 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:24 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:50 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:00:56 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi) - 90\n+        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:03 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:20 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:27 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        normalizedSpeed = npSpeed / np.linalg.norm(npSpeed)\n+        normalizedSpeed = npSpeed / math.abs(np.linalg.norm(npSpeed)\n         \n         self.say(normalizedSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:31 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        normalizedSpeed = npSpeed / math.abs(np.linalg.norm(npSpeed)\n+        normalizedSpeed = npSpeed / math.abs(np.linalg.norm(npSpeed))\n         \n         self.say(normalizedSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:33 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:41 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\events.py\", line 31, in __process_queue\n    self.__fn(*args, **kwargs)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"<stdin>\", line 105, in my_on_message\nAttributeError: module 'math' has no attribute 'abs'. Did you mean: 'fabs'?"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:01:44 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:04 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        normalizedSpeed = npSpeed / math.abs(np.linalg.norm(npSpeed))\n+        normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n         self.say(normalizedSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:04 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:29 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n+        #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n         self.say(normalizedSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(normalizedSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n+        self.heading = np.arctan(npSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:52 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(normalizedSpeed)\n         \n-        self.heading = np.arctan(npSpeed[1] / normalizedSpeed[0]) * (180 / math.pi)\n+        self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:02:52 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:02 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\events.py\", line 31, in __process_queue\n    self.__fn(*args, **kwargs)\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"<stdin>\", line 107, in my_on_message\nNameError: name 'normalizedSpeed' is not defined"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:06 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:15 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n-        self.say(normalizedSpeed)\n+        self.say(npSpeed)\n         \n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:15 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:16 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:37 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:38 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:40 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -16,6 +16,7 @@\n     while True:\n         if(globals.flying):\n             globals.speed[1] += grav * step\n+            \n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:03:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -18,6 +18,7 @@\n             globals.speed[1] += grav * step\n             \n             globals.speed[0] += ar * step\n+            \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n         time.sleep(step)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,7 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             \n-            globals.speed[0] += ar * step\n+            globals.speed[0] += npar * step\n             \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:17 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,7 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             \n-            globals.speed[0] += npar * step\n+            globals.speed[0] += np.max([ar * step\n             \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,7 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             \n-            globals.speed[0] += np.max([ar * step\n+            globals.speed[0] += np.max([ar * step, 0])\n             \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:25 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,7 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             \n-            globals.speed[0] += np.max([ar * step, 0])\n+            globals.speed[0] += np.max([ar * step\n             \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:25 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,7 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             \n-            globals.speed[0] += np.max([ar * step\n+            globals.speed[0] += ar * step\n             \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:27 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,6 @@\n             globals.speed[1] += grav * step\n             \n             globals.speed[0] += ar * step\n-            \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n         time.sleep(step)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:27 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,6 @@\n     while True:\n         if(globals.flying):\n             globals.speed[1] += grav * step\n-            \n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:29 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:53 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:04:58 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(npSpeed)\n         \n-        self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n+        self.heading =  * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(npSpeed)\n         \n-        self.heading =  * (180 / math.pi)\n+        self.heading = 0 * (180 / math.pi)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:01 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:13 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:17 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(npSpeed)\n         \n-        self.heading = 0 * (180 / math.pi)\n+        self.heading = 0 * (180 / math.pi) - 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:17 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:26 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(npSpeed)\n         \n-        self.heading = 0 * (180 / math.pi) - 90\n+        self.heading = 0 * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:30 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:39 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:05:41 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         self.say(npSpeed)\n         \n-        self.heading = 0 * (180 / math.pi) + 90\n+        self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:06:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,5 @@\n         \n         self.say(npSpeed)\n         \n+        # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:06:01 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:06:03 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:06:31 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:07:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,5 +29,6 @@\n         \n         self.say(npSpeed)\n         \n+        \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:07:54 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,7 @@\n         \n         self.say(npSpeed)\n         \n+        angle = np.arcsin()\n         \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:08:07 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,7 +29,6 @@\n         \n         self.say(npSpeed)\n         \n-        angle = np.arcsin()\n         \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:08:12 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,7 +28,6 @@\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n         self.say(npSpeed)\n-        \n-        \n+                \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:08:46 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "sprite", 
+        "content": "(npSpeed[1] / npSpeed[0]) * (180 / math.pi)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:08:49 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n-        self.say(npSpeed)\n+        self.say((npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:08:51 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:09:27 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:09:32 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:09:46 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,7 @@\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n         self.say((npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n+        \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:22 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,7 @@\n         \n         self.say((npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n         \n+        angle = \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:24 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n-        self.say((npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n+        self.say()\n         \n         angle = \n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:24 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,6 @@\n         self.say()\n         \n         angle = \n-                \n+(npSpeed[1] / npSpeed[0]) * (180 / math.pi)                \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:25 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,6 @@\n         self.say()\n         \n         angle = \n-(npSpeed[1] / npSpeed[0]) * (180 / math.pi)                \n+                \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:25 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,7 +29,7 @@\n         \n         self.say()\n         \n-        angle = \n+        angle = (npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:10:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,7 @@\n         self.say()\n         \n         angle = (npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n+        \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:16:36 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:16:37 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:16:41 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:16:49 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "sprite", 
+        "content": "self.heading = 90 - np.rad2deg(globals.angle)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:16:54 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,7 +29,7 @@\n         \n         self.say()\n         \n-        angle = (npSpeed[1] / npSpeed[0]) * (180 / math.pi)\n+        self.heading = 90 - np.rad2deg(globals.angle)\n         \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:17:17 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:17:20 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:17:35 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:17 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,4 +33,4 @@\n         \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n-        self.heading = np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n+        self.heading = np.rad2deg np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:20 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,4 +33,4 @@\n         \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n-        self.heading = np.rad2deg np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n+        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:22 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,4 +33,4 @@\n         \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n-        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90\n+        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:23 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,4 +33,4 @@\n         \n                 \n         # The +90 is to account for the difference between the sprite's facing angle and it's costume\n-        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi) + 90)\n+        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:29 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,4 @@\n         \n         self.heading = 90 - np.rad2deg(globals.angle)\n         \n-                \n-        # The +90 is to account for the difference between the sprite's facing angle and it's costume\n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,5 +30,4 @@\n         self.say()\n         \n         self.heading = 90 - np.rad2deg(globals.angle)\n-        \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:35 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n         \n-        self.say()\n         \n         self.heading = 90 - np.rad2deg(globals.angle)\n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:36 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,7 +26,6 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n-        \n-        \n+                \n         self.heading = 90 - np.rad2deg(globals.angle)\n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,5 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n                 \n-        self.heading = 90 - np.rad2deg(globals.angle)\n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:41 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:53 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:18:59 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,4 @@\n         npSpeed = np.array(globals.speed)\n         #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n                 \n-        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]) * (180 / math.pi))\n+        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:19:01 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:19:14 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:19:17 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,6 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        #normalizedSpeed = npSpeed / np.abs(np.linalg.norm(npSpeed))\n                 \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:19:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,6 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        npSpeed = np.array(globals.speed)\n-                \n+        npSpeed = np.array(globals.speed)                \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:21:55 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:22:06 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:22:27 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        npSpeed = np.array(globals.speed)                \n+        npSpeed = np.array(globals.speed)             \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:22:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        npSpeed = np.array(globals.speed)             \n+        npSpeed = np.array(globals.speed)\n+        self.say(npSpeed)             \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:22:32 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:23:26 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:30:55 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,5 +25,5 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n-        self.say(npSpeed)             \n+        self.say(npSpeed)\n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,4 +26,5 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         self.say(npSpeed)\n+        \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:42 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,4 +27,5 @@\n         npSpeed = np.array(globals.speed)\n         self.say(npSpeed)\n         \n+        \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,5 +27,6 @@\n         npSpeed = np.array(globals.speed)\n         self.say(npSpeed)\n         \n+        angle = \n         \n         self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:47 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         angle = \n         \n-        self.heading = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n+        self.heading = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:47 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,7 @@\n         npSpeed = np.array(globals.speed)\n         self.say(npSpeed)\n         \n-        angle = \n+        angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n+\n         \n         self.heading = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:50 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,5 @@\n         self.say(npSpeed)\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n-\n         \n         self.heading = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:52 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,4 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        self.heading = \n+        self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:33:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,4 +29,5 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n+        \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,5 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n+        if ()\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if ()\n+        if (npSpeed[])\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[])\n+        if (npSpeed[0])\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0])\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0)\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0)\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) {\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,4 +31,5 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) {\n         \n+        \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:34:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -29,7 +29,6 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0) {\n-        \n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:35:17 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,5 +30,6 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+            \n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,6 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            \n+            angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:16 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,6 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle\n+            270 - angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,6 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            270 - angle\n+            angle = 270 - angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:20 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,5 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n+            \n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:20 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-            \n+        \n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:22 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        \n+        elif ()\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:24 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        elif ()\n+        elif (npSpeed[])\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        elif (npSpeed[])\n+        elif (npSpeed[0])\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        elif (npSpeed[0])\n+        elif (npSpeed[0] < 0)\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,6 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        elif (npSpeed[0] < 0)\n+        elif (npSpeed[0] < 0):\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,5 +32,6 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n+            angle = 180 - angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:36:51 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:37:19 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:37:20 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:37:30 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:37:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep(step)\n+        time.sleep(0)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:37:53 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:03 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:04 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:16 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:19 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep(0)\n+        time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:19 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n+            self.say(f\"{globals.x} {globals.y}\")\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:20 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {globals.y}\")\n+            self.say(f\"{globals.x} {globals.y}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:21 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {globals.y}\"\n+            self.say(f\"{globals.x} {}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:21 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{globals.x} {}\"\n+            self.say(f\"{} {}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-            self.say(f\"{} {}\"\n         time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:28 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -10,7 +10,7 @@\n     \n @onstart()\n def run(self):\n-    step = 1\n+    step = 0.1\n     grav = -9.81\n     ar = -7\n     while True:\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:28 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:38:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:05 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep(step)\n+        time.sleep(0.1)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:05 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:06 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -10,7 +10,7 @@\n     \n @onstart()\n def run(self):\n-    step = 0.1\n+    step = 0.01\n     grav = -9.81\n     ar = -7\n     while True:\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:11 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:21 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:24 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep(0.1)\n+        time.sleep(0.01)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:39:24 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:40:00 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:40:01 2025", 
       "msg": {
         "type": "ide::save"
       }
