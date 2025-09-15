@@ -22,7 +22,7 @@
         {
           "type": "globals", 
           "name": "globals", 
-          "value": "globals.charge = 0\nglobals.angle = np.deg2rad(45)\nglobals.speed = [0, 0]\nglobals.x = 0\nglobals.y = 0\nglobals.launching = False\nglobals.flying = False"
+          "value": "globals.charge = 0\nglobals.angle = np.deg2rad(45)\nglobals.speed = [0, 0]\nglobals.x = 0\nglobals.y = 0\nglobals.launching = False\nglobals.flying = False\nglobals.gravitational_constant = -9.8"
         }, 
         {
           "type": "stage", 
@@ -37,7 +37,7 @@
         {
           "type": "sprite", 
           "name": "aimingDots", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 10\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            \n            self.local_angle = globals.angle;\n            self.local_charge = globals.charge;\n            \n            if globals.charge == 0:\n                stage.clear_drawings()\n                break\n                \n            self.renderKinematics(5)\n            \n            \ndef renderKinematics(self, iterations):\n    stage.clear_drawings()\n    \n    for i in range(1, iterations + 1):\n        self.drawDotAtPoint(\n            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2),\n            12 - i\n        )\n            \ndef drawDotAtPoint(self, x, y, size):\n    self.drawing = False\n    self.pen_color = 'black'\n    self.pen_size = size\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n    \n    self.drawing = False\n    self.drawing = False\n    self.pen_color = 'white'\n    self.pen_size = size - 2\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n\n        "
+          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 10\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            \n            self.local_angle = globals.angle;\n            self.local_charge = globals.charge;\n            \n            if globals.charge == 0:\n                stage.clear_drawings()\n                break\n                \n            self.renderKinematics(5)\n            \n            \ndef renderKinematics(self, iterations):\n    stage.clear_drawings()\n    \n    for i in range(1, iterations + 1):\n        self.drawDotAtPoint(\n            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (globals.gravitational_constant) * (i ** 2),\n            12 - i\n        )\n            \ndef drawDotAtPoint(self, x, y, size):\n    self.drawing = False\n    self.pen_color = 'black'\n    self.pen_size = size\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n    \n    self.drawing = False\n    self.drawing = False\n    self.pen_color = 'white'\n    self.pen_size = size - 2\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n\n        "
         }
       ], 
       "images": {}, 
@@ -14506,6 +14506,116 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "b9151f6a", 
       "time": "Mon Sep 15 11:32:45 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -5,3 +5,4 @@\n globals.y = 0\n globals.launching = False\n globals.flying = False\n+globals.gravitational_constant = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:33 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:36 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "-9.8"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:38 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:38 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -5,4 +5,4 @@\n globals.y = 0\n globals.launching = False\n globals.flying = False\n-globals.gravitational_constant = \n+globals.gravitational_constant = -9.8\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:41 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -26,7 +26,7 @@\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2),\n+            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (globals.gravitational_constant) * (i ** 2),\n             12 - i\n         )\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:33:56 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "globals.gravitational_constant"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:34:15 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:34:45 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:34:48 2025", 
       "msg": {
         "type": "ide::save"
       }
