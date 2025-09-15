@@ -1,5 +1,5 @@
 {
-  "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+  "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
   "client_type": "editor", 
   "roles": [
     {
@@ -22,7 +22,7 @@
         {
           "type": "globals", 
           "name": "globals", 
-          "value": "globals.charge = 0\nglobals.angle = np.deg2rad(45)\nglobals.speed = [0, 0]\nglobals.x = 0\nglobals.y = 0\nglobals.launching = False\nglobals.flying = False"
+          "value": "globals.charge = 0\nglobals.angle = np.deg2rad(45)\nglobals.speed = [0, 0]\nglobals.x = 0\nglobals.y = 0\nglobals.launching = False\nglobals.flying = False\n\nglobals.acceleration = np.array([0, 0])\nglobals.velocity = np.array([0, 0])"
         }, 
         {
           "type": "stage", 
@@ -32,7 +32,7 @@
         {
           "type": "sprite", 
           "name": "sprite", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)"
+          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n        "
         }
       ], 
       "images": {}, 
@@ -7937,6 +7937,397 @@
       "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
       "session_id": "075f2070", 
       "time": "Fri Sep 12 13:00:37 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::open", 
+        "project": {
+          "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+          "client_type": "editor", 
+          "roles": [
+            {
+              "name": "untitled", 
+              "stage_size": [
+                1080, 
+                720
+              ], 
+              "block_sources": [
+                "netsblox://assets/default-blocks.json"
+              ], 
+              "blocks": [], 
+              "imports": [
+                "time", 
+                "math", 
+                "random", 
+                "numpy"
+              ], 
+              "editors": [
+                {
+                  "type": "globals", 
+                  "name": "globals", 
+                  "value": "globals.charge = 0\nglobals.angle = np.deg2rad(45)\nglobals.speed = [0, 0]\nglobals.x = 0\nglobals.y = 0\nglobals.launching = False\nglobals.flying = False"
+                }, 
+                {
+                  "type": "stage", 
+                  "name": "stage", 
+                  "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        print('mu')\n    \n@onstart()\ndef run(self):\n    step = 1\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(step)\n        \n    "
+                }, 
+                {
+                  "type": "sprite", 
+                  "name": "sprite", 
+                  "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)"
+                }
+              ]
+            }
+          ]
+        }, 
+        "role": "untitled", 
+        "source": "existing"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:21 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -22,3 +22,4 @@\n @nb.on_message('launched')\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n+    \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:47:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -23,3 +23,4 @@\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n     \n+    while True:\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:48:23 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,3 +24,4 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n+        self.x += globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:48:31 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,4 +24,4 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.x += globals.angle\n+        self.x += math.cos(globals.angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:48:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,4 +24,4 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.x += math.cos(globals.angle\n+        self.x += math.cos(globals.angle) * globals.charge\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:48:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,3 +25,4 @@\n     \n     while True:\n         self.x += math.cos(globals.angle) * globals.charge\n+        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:48:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,5 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        self.x += math.cos(globals.angle) * globals.charge\n+        globals.x += math.cos(globals.angle) * globals.charge\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:09 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,4 +25,4 @@\n     \n     while True:\n         globals.x += math.cos(globals.angle) * globals.charge\n-        \n+        globals.y += \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:31 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,4 @@\n     self.say('GO', duration = .0125)\n     \n     while True:\n-        globals.x += math.cos(globals.angle) * globals.charge\n-        globals.y += \n+        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -23,5 +23,6 @@\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n     \n+    \n     while True:\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -24,5 +24,6 @@\n     self.say('GO', duration = .0125)\n     \n     \n+    \n     while True:\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:34 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:49:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -5,3 +5,5 @@\n globals.y = 0\n globals.launching = False\n globals.flying = False\n+\n+globals.accelerationVector = \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -6,4 +6,4 @@\n globals.launching = False\n globals.flying = False\n \n-globals.accelerationVector = \n+globals.accelerationVector = np.array()\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:07 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -6,4 +6,4 @@\n globals.launching = False\n globals.flying = False\n \n-globals.accelerationVector = np.array()\n+globals.accelerationVector = np.array([])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:09 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -6,4 +6,4 @@\n globals.launching = False\n globals.flying = False\n \n-globals.accelerationVector = np.array([])\n+globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:10 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "globals", 
+        "content": "globals.accelerationVector = np.array([0, 0])"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:11 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -7,3 +7,4 @@\n globals.flying = False\n \n globals.accelerationVector = np.array([0, 0])\n+globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:12 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": ""
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:12 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -8,3 +8,4 @@\n \n globals.accelerationVector = np.array([0, 0])\n globals.accelerationVector = np.array([0, 0])\n+globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -7,5 +7,5 @@\n globals.flying = False\n \n globals.accelerationVector = np.array([0, 0])\n+globals.velocityVector = np.array([0, 0])\n globals.accelerationVector = np.array([0, 0])\n-globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -6,6 +6,6 @@\n globals.launching = False\n globals.flying = False\n \n-globals.accelerationVector = np.array([0, 0])\n+globals.acceleration = np.array([0, 0])\n globals.velocityVector = np.array([0, 0])\n globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:31 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -7,5 +7,5 @@\n globals.flying = False\n \n globals.acceleration = np.array([0, 0])\n-globals.velocityVector = np.array([0, 0])\n+globals.velocity = np.array([0, 0])\n globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:32 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "globals", 
+        "diff": "--- \n+++ \n@@ -8,4 +8,3 @@\n \n globals.acceleration = np.array([0, 0])\n globals.velocity = np.array([0, 0])\n-globals.accelerationVector = np.array([0, 0])\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:40 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:44 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -23,7 +23,5 @@\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n     \n-    \n-    \n-    while True:\n+\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:47 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -22,6 +22,4 @@\n @nb.on_message('launched')\n def my_on_message(self):\n     self.say('GO', duration = .0125)\n-    \n-\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 11:50:47 2025", 
       "msg": {
         "type": "ide::save"
       }
