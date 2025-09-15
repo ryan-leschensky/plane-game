@@ -27,12 +27,12 @@
         {
           "type": "stage", 
           "name": "stage", 
-          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        nb.send_message('animate')\n    \n@onstart()\ndef run(self):\n    step = 1\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(step)\n            "
+          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        nb.send_message('animate')\n    \n@onstart()\ndef run(self):\n    step = 1\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(step)\n            "
         }, 
         {
           "type": "sprite", 
           "name": "sprite", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.costume = images.plane_1  \n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    while not globals.flying: \n        globals.launching = True\n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n    \n@nb.on_message('animate')\ndef my_on_message_2(self):\n    wait = .125\n    while globals.flying:\n        self.costume = images.plane_1         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_2         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_3         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_2         \n        time.sleep(wait)\n        "
+          "value": "@onstart()\ndef my_onstart(self):\n    self.costume = images.plane_1  \n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    while not globals.flying: \n        globals.launching = True\n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n\n    \n    \n@nb.on_message('animate')\ndef my_on_message_2(self):\n    wait = .125\n    while globals.flying:\n        self.costume = images.plane_1         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_2         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_3         \n        time.sleep(wait)\n        if not globals.flying:\n            break\n        self.costume = images.plane_2         \n        time.sleep(wait)\n        "
         }, 
         {
           "type": "sprite", 
@@ -16392,6 +16392,149 @@
       "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
       "session_id": "b1b232de", 
       "time": "Mon Sep 15 12:46:13 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:48:41 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:48:44 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:48:46 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:12 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:13 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:15 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:25 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:26 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:29 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,6 @@\n         else:\n             self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n         self.heading = 90 - np.rad2deg(globals.angle)\n-        self.say(np.round(globals.charge))\n \n     \n @nb.on_message('launched')\n"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:31 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -18,9 +18,7 @@\n         self.heading = 90 - np.rad2deg(globals.angle)\n \n     \n-@nb.on_message('launched')\n-def my_on_message(self):\n-    self.say('GO', duration = .0125)\n+\n     \n @nb.on_message('animate')\n def my_on_message_2(self):\n"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,6 @@\n         self.heading = 90 - np.rad2deg(globals.angle)\n \n     \n-\n     \n @nb.on_message('animate')\n def my_on_message_2(self):\n"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:33 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:35 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -3,7 +3,6 @@\n     if(globals.launching):\n         globals.launching = False\n         globals.flying = True\n-        nb.send_message('launched')\n         globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n         globals.charge = 0\n         nb.send_message('animate')\n"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:37 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:49:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1240f31f-859e-449f-a96e-65ca8ff5a420", 
+      "session_id": "b1b232de", 
+      "time": "Mon Sep 15 12:51:01 2025", 
       "msg": {
         "type": "ide::save"
       }
