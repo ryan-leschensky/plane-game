@@ -37,7 +37,7 @@
         {
           "type": "sprite", 
           "name": "aimingDots", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 10\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            stage.clear_drawings()\n            \n            if globals.charge == 0:\n                self.local_angle = globals.angle;\n                self.local_charge = globals.charge;\n                break\n            \n            for i in range(1, 6):\n                self.pen_color = 'black'\n                self.drawing = False\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n                self.pen_size = 12 - i\n                self.drawing = True\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n                self.pen_color = 'white'\n                self.pen_size = 1 - i - 2\n                self.drawing = True\n                self.pos = (\n                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                )\n            self.local_angle = globals.angle;\n            self.local_charge = globals.charge;\n            self.drawing = False\n            \n            \n\n        \n\n        \n        "
+          "value": "@onstart()\ndef my_onstart(self):\n    self.visible = False\n    \n    self.pen_size = 10\n    \n    self.local_angle = globals.angle;\n    self.local_charge = globals.charge;\n    \n    while True:        \n        if self.local_angle != globals.angle or self.local_charge != globals.charge:\n            \n            self.local_angle = globals.angle;\n            self.local_charge = globals.charge;\n            \n            if globals.charge == 0:\n                stage.clear_drawings()\n                break\n                \n            self.renderKinematics(5)\n            \n            \ndef renderKinematics(self, iterations):\n    stage.clear_drawings()\n    \n    for i in range(1, iterations + 1):\n        self.drawDotAtPoint(\n            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2),\n            12 - i\n        )\n            \ndef drawDotAtPoint(self, x, y, size):\n    self.drawing = False\n    self.pen_color = 'black'\n    self.pen_size = size\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n    \n    self.drawing = False\n    self.drawing = False\n    self.pen_color = 'white'\n    self.pen_size = size - 2\n    self.pos = (x, y)\n    \n    self.drawing = True\n    \n    self.pos = (x, y)\n\n        "
         }
       ], 
       "images": {}, 
@@ -12269,6 +12269,2243 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "b9151f6a", 
       "time": "Mon Sep 15 11:15:17 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:22 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -36,8 +36,6 @@\n                     sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-            self.local_angle = globals.angle;\n-            self.local_charge = globals.charge;\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -10,6 +10,7 @@\n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n+            \n             \n             if globals.charge == 0:\n                 self.local_angle = globals.angle;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -10,6 +10,7 @@\n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n+            \n             \n             \n             if globals.charge == 0:\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:26 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,7 +11,9 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-            \n+                        self.local_angle = globals.angle;\n+            self.local_charge = globals.charge;\n+\n             \n             if globals.charge == 0:\n                 self.local_angle = globals.angle;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:27 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,7 +11,7 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-                        self.local_angle = globals.angle;\n+                    self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:28 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,7 +11,7 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-                    self.local_angle = globals.angle;\n+                self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:28 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -11,7 +11,7 @@\n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n             stage.clear_drawings()\n             \n-                self.local_angle = globals.angle;\n+            self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -13,7 +13,6 @@\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n-\n             \n             if globals.charge == 0:\n                 self.local_angle = globals.angle;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:31 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -15,8 +15,6 @@\n             self.local_charge = globals.charge;\n             \n             if globals.charge == 0:\n-                self.local_angle = globals.angle;\n-                self.local_charge = globals.charge;\n                 break\n             \n             for i in range(1, 6):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -21,7 +21,7 @@\n                 self.pen_color = 'black'\n                 self.drawing = False\n                 self.pos = (\n-                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_size = 12 - i\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:50 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -22,7 +22,7 @@\n                 self.drawing = False\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n-                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:16:56 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -21,7 +21,7 @@\n                 self.pen_color = 'black'\n                 self.drawing = False\n                 self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_size = 12 - i\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:17:07 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -22,7 +22,7 @@\n                 self.drawing = False\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:17:16 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 self.pen_size = 12 - i\n                 self.drawing = True\n                 self.pos = (\n-                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_color = 'white'\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:17:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 self.pen_size = 12 - i\n                 self.drawing = True\n                 self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_color = 'white'\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:17:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,7 +28,7 @@\n                 self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_color = 'white'\n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:17:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,7 +28,7 @@\n                 self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_color = 'white'\n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:16 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n                 self.pen_size = 1 - i - 2\n                 self.drawing = True\n                 self.pos = (\n-                    sprite.x_pos + math.cos(globals.angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n             self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:23 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n                 self.pen_size = 1 - i - 2\n                 self.drawing = True\n                 self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * globals.charge * i,\n+                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n             self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -35,7 +35,7 @@\n                 self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(globals.angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -35,7 +35,7 @@\n                 self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * globals.charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:38 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:18:55 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:10 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.pen_color = 'white'\n-                self.pen_size = 1 - i - 2\n                 self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,6 +30,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n+                \n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:11 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,8 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                \n+                                self.pen_size = 1 - i - 2\n+\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:12 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                                 self.pen_size = 1 - i - 2\n-\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:12 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                                self.pen_size = 1 - i - 2\n+                            self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:12 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                            self.pen_size = 1 - i - 2\n+                        self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:13 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                        self.pen_size = 1 - i - 2\n+                    self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:13 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                    self.pen_size = 1 - i - 2\n+                self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:17 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:26 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:39 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -20,10 +20,7 @@\n             for i in range(1, 6):\n                 self.pen_color = 'black'\n                 self.drawing = False\n-                self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-                )\n+\n                 self.pen_size = 12 - i\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -20,7 +20,6 @@\n             for i in range(1, 6):\n                 self.pen_color = 'black'\n                 self.drawing = False\n-\n                 self.pen_size = 12 - i\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:41 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,6 @@\n             \n             for i in range(1, 6):\n                 self.pen_color = 'black'\n-                self.drawing = False\n                 self.pen_size = 12 - i\n                 self.drawing = True\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,6 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n+                \n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:43 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,8 @@\n                 break\n             \n             for i in range(1, 6):\n-                \n+                                self.drawing = False\n+\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,6 @@\n             \n             for i in range(1, 6):\n                                 self.drawing = False\n-\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:44 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                                self.drawing = False\n+                            self.drawing = False\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:44 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                            self.drawing = False\n+                        self.drawing = False\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:44 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                        self.drawing = False\n+                    self.drawing = False\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:45 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                    self.drawing = False\n+                self.drawing = False\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:46 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -21,7 +21,6 @@\n                 self.drawing = False\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n-                self.drawing = True\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:48 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,6 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n+                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:48 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,8 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                \n+                                self.drawing = True\n+\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:49 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -26,7 +26,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                                 self.drawing = True\n-\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:49 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                                self.drawing = True\n+                            self.drawing = True\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:50 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                            self.drawing = True\n+                        self.drawing = True\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:50 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                        self.drawing = True\n+                    self.drawing = True\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:50 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                    self.drawing = True\n+                self.drawing = True\n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,7 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.drawing = True\n+                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:51 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,7 @@\n                 )\n                 self.drawing = True\n                 \n+                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:54 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,7 @@\n                 self.drawing = True\n                 \n                 \n+                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:54 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:55 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:57 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "aimingDots", 
+        "content": "time.sleep(1)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:58 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:19:58 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,7 @@\n                 )\n                 self.drawing = True\n                 \n+                time.sleep(1)\n                 \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 self.drawing = True\n                 \n-                time.sleep(1)\n+                yield();\n                 \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:39 2025", 
+      "msg": {
+        "type": "drag-n-drop::start", 
+        "editor": "aimingDots", 
+        "content": "time.sleep(1)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:40 2025", 
+      "msg": {
+        "type": "drag-n-drop::stop", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:40 2025", 
+      "msg": {
+        "type": "drag-n-drop::commit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,7 @@\n                 self.drawing = True\n                 \n                 yield();\n+                time.sleep(1)\n                 \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:41 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,6 @@\n                 )\n                 self.drawing = True\n                 \n-                yield();\n                 time.sleep(1)\n                 \n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 self.drawing = True\n                 \n-                time.sleep(1)\n+                time.sleep(0)\n                 \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:49 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -29,7 +29,6 @@\n                 \n                 time.sleep(0)\n                 \n-                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:52 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n                 \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n-                self.drawing = True\n+                self.drawing = False\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:53 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,6 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                self.drawing = True\n                 \n                 time.sleep(0)\n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:54 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,6 +28,7 @@\n                 \n                 time.sleep(0)\n                 \n+                \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n                 self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:54 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,8 @@\n                 )\n                 \n                 time.sleep(0)\n-                \n+                                self.drawing = True\n+\n                 \n                 self.pen_size = 1 - i - 2\n                 self.pen_color = 'white'\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:56 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 \n                 time.sleep(0)\n-                                self.drawing = True\n+                            self.drawing = True\n \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:56 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 \n                 time.sleep(0)\n-                            self.drawing = True\n+                        self.drawing = True\n \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:56 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 \n                 time.sleep(0)\n-                        self.drawing = True\n+                    self.drawing = True\n \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:57 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,7 @@\n                 )\n                 \n                 time.sleep(0)\n-                    self.drawing = True\n+                self.drawing = True\n \n                 \n                 self.pen_size = 1 - i - 2\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:20:59 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "time.sleep(0)\n                self.drawing = True"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:00 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,6 +37,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n+                \n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:01 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -38,6 +38,7 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 \n+                \n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:01 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -38,7 +38,8 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 \n-                \n+                time.sleep(0)\n+                self.drawing = True\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:04 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:14 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                 self.drawing = True\n \n                 \n-                self.pen_size = 1 - i - 2\n+                self.pen_size = 1 - i - 3\n                 self.pen_color = 'white'\n                 self.drawing = False\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:23 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -39,7 +39,6 @@\n                 )\n                 \n                 time.sleep(0)\n-                self.drawing = True\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:23 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,7 +37,8 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                \n+                                self.drawing = True\n+\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -38,7 +38,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                                 self.drawing = True\n-\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:25 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,7 +37,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                                self.drawing = True\n+                            self.drawing = True\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:26 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,7 +37,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                            self.drawing = True\n+                        self.drawing = True\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:26 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,7 +37,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                        self.drawing = True\n+                    self.drawing = True\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:26 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -37,7 +37,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                    self.drawing = True\n+                self.drawing = True\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:29 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -27,7 +27,6 @@\n                 )\n                 \n                 time.sleep(0)\n-                self.drawing = True\n \n                 \n                 self.pen_size = 1 - i - 3\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:30 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,8 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                \n+                                self.drawing = True\n+\n                 time.sleep(0)\n \n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:31 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                                self.drawing = True\n+                            self.drawing = True\n \n                 time.sleep(0)\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:31 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                            self.drawing = True\n+                        self.drawing = True\n \n                 time.sleep(0)\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:31 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                        self.drawing = True\n+                    self.drawing = True\n \n                 time.sleep(0)\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:31 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                    self.drawing = True\n+                self.drawing = True\n \n                 time.sleep(0)\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -26,7 +26,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 self.drawing = True\n-\n                 time.sleep(0)\n \n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:34 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:43 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:47 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -36,7 +36,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                self.drawing = True\n+                #self.drawing = True\n                 time.sleep(0)\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:47 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:55 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:21:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                self.drawing = False\n+                self.drawing = True\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:00 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,6 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                self.drawing = True\n                 time.sleep(0)\n \n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:01 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,6 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                time.sleep(0)\n \n                 \n                 self.pen_size = 1 - i - 3\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:05 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,6 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-\n                 \n                 self.pen_size = 1 - i - 3\n                 self.pen_color = 'white'\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:05 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:24 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:27 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,6 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 #self.drawing = True\n-                time.sleep(0)\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:29 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n-                #self.drawing = True\n+                self.drawing = True\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:30 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -33,6 +33,7 @@\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n+                \n                 self.drawing = True\n             self.drawing = False\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 \n-                self.drawing = True\n+                self.drawing = False\n             self.drawing = False\n             \n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:34 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:39 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:22:39 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:23:16 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:23:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,7 @@\n             \n             for i in range(1, 6):\n                 self.drawing = True\n+                \n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.pos = (\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:23:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -29,6 +29,7 @@\n                 \n                 self.pen_size = 1 - i - 3\n                 self.pen_color = 'white'\n+                \n                 self.drawing = False\n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:23:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -31,6 +31,7 @@\n                 self.pen_color = 'white'\n                 \n                 self.drawing = False\n+                \n                 self.pos = (\n                     sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:23:46 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -18,7 +18,7 @@\n                 break\n             \n             for i in range(1, 6):\n-                self.drawing = True\n+                self.drawing = False\n                 \n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:09 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,9 +40,5 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-            \n-\n+def drawDotAtPoint()\n         \n-\n-        \n-        \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,5 +40,5 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-def drawDotAtPoint()\n+def drawDotAtPoint(x, y)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:13 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,5 +40,5 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-def drawDotAtPoint(x, y)\n+def drawDotAtPoint(x, y):\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:17 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,4 +41,5 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y):\n+    \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,6 +40,6 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-def drawDotAtPoint(x, y):\n+def drawDotAtPoint(x, y, size):\n     \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:30 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "                self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:30 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,5 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-    \n+                    self.drawing = False\n+\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:32 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-                    self.drawing = False\n+                self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:32 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-                self.drawing = False\n+            self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:32 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-            self.drawing = False\n+        self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:32 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-        self.drawing = False\n+    self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:32 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-    self.drawing = False\n+self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,6 @@\n             self.drawing = False\n             \n def drawDotAtPoint(x, y, size):\n-self.drawing = False\n+    self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -42,5 +42,6 @@\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:36 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -43,5 +43,6 @@\n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n     \n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:39 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "self.pen_color = 'black'\n                self.pen_size = 12 - i\n                self.pos = (\n                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                )"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:40 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -43,6 +43,11 @@\n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n     \n-    \n+    self.pen_color = 'black'\n+                self.pen_size = 12 - i\n+                self.pos = (\n+                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+                )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,10 +44,10 @@\n     self.drawing = False\n     \n     self.pen_color = 'black'\n-                self.pen_size = 12 - i\n-                self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-                )\n+            self.pen_size = 12 - i\n+            self.pos = (\n+                sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+                sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+            )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,10 +44,10 @@\n     self.drawing = False\n     \n     self.pen_color = 'black'\n-            self.pen_size = 12 - i\n-            self.pos = (\n-                sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-            )\n+        self.pen_size = 12 - i\n+        self.pos = (\n+            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+        )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:44 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,10 +44,10 @@\n     self.drawing = False\n     \n     self.pen_color = 'black'\n-        self.pen_size = 12 - i\n-        self.pos = (\n-            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-        )\n+    self.pen_size = 12 - i\n+    self.pos = (\n+        sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+        sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+    )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:24:49 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,7 +44,7 @@\n     self.drawing = False\n     \n     self.pen_color = 'black'\n-    self.pen_size = 12 - i\n+    self.pen_size = size\n     self.pos = (\n         sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n         sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:04 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -46,8 +46,7 @@\n     self.pen_color = 'black'\n     self.pen_size = size\n     self.pos = (\n-        sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-        sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+        x, y * (i ** 2)\n     )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:05 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -46,7 +46,7 @@\n     self.pen_color = 'black'\n     self.pen_size = size\n     self.pos = (\n-        x, y * (i ** 2)\n+        x, y\n     )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -45,8 +45,7 @@\n     \n     self.pen_color = 'black'\n     self.pen_size = size\n-    self.pos = (\n-        x, y\n+    self.pos = (x, y\n     )\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:12 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -45,7 +45,6 @@\n     \n     self.pen_color = 'black'\n     self.pen_size = size\n-    self.pos = (x, y\n-    )\n+    self.pos = (x, y)\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:13 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -46,5 +46,6 @@\n     self.pen_color = 'black'\n     self.pen_size = size\n     self.pos = (x, y)\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:20 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -47,5 +47,6 @@\n     self.pen_size = size\n     self.pos = (x, y)\n     \n+    self.drawing = True\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:23 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -45,7 +45,7 @@\n     \n     self.pen_color = 'black'\n     self.pen_size = size\n-    self.pos = (x, y)\n+    \n     \n     self.drawing = True\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:24 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -45,7 +45,7 @@\n     \n     self.pen_color = 'black'\n     self.pen_size = size\n-    \n+    self.pos = (x, y)\n     \n     self.drawing = True\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -48,5 +48,6 @@\n     self.pos = (x, y)\n     \n     self.drawing = True\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -49,5 +49,6 @@\n     \n     self.drawing = True\n     \n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:25 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -49,6 +49,6 @@\n     \n     self.drawing = True\n     \n-    \n+    self.pos = (x, y)\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -50,5 +50,6 @@\n     self.drawing = True\n     \n     self.pos = (x, y)\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -51,5 +51,6 @@\n     \n     self.pos = (x, y)\n     \n+    self.drawing = False;\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -42,7 +42,6 @@\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n-    \n     self.pen_color = 'black'\n     self.pen_size = size\n     self.pos = (x, y)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:36 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -50,6 +50,6 @@\n     \n     self.pos = (x, y)\n     \n-    self.drawing = False;\n+    self.drawing = False\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:38 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "self.drawing = False\n    self.pen_color = 'black'\n    self.pen_size = size\n    self.pos = (x, y)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -51,5 +51,6 @@\n     self.pos = (x, y)\n     \n     self.drawing = False\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:39 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -51,6 +51,9 @@\n     self.pos = (x, y)\n     \n     self.drawing = False\n-    \n+    self.drawing = False\n+    self.pen_color = 'black'\n+    self.pen_size = size\n+    self.pos = (x, y)\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -52,7 +52,7 @@\n     \n     self.drawing = False\n     self.drawing = False\n-    self.pen_color = 'black'\n+    self.pen_color = 'white'\n     self.pen_size = size\n     self.pos = (x, y)\n \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:47 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -53,7 +53,7 @@\n     self.drawing = False\n     self.drawing = False\n     self.pen_color = 'white'\n-    self.pen_size = size\n+    self.pen_size = size - 1\n     self.pos = (x, y)\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:49 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "self.drawing = True"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:50 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -55,5 +55,6 @@\n     self.pen_color = 'white'\n     self.pen_size = size - 1\n     self.pos = (x, y)\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:50 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -56,5 +56,6 @@\n     self.pen_size = size - 1\n     self.pos = (x, y)\n     \n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:50 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -56,6 +56,6 @@\n     self.pen_size = size - 1\n     self.pos = (x, y)\n     \n-    \n+    self.drawing = True\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:52 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "self.pos = (x, y)"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -57,5 +57,6 @@\n     self.pos = (x, y)\n     \n     self.drawing = True\n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -58,5 +58,6 @@\n     \n     self.drawing = True\n     \n+    \n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:53 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -58,6 +58,6 @@\n     \n     self.drawing = True\n     \n-    \n+    self.pos = (x, y)\n \n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:25:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,6 +40,7 @@\n                 self.drawing = False\n             self.drawing = False\n             \n+            \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n     self.pen_color = 'black'\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,6 +40,7 @@\n                 self.drawing = False\n             self.drawing = False\n             \n+def renderKinematics()\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,7 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-def renderKinematics()\n+def renderKinematics(iterations)\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,7 @@\n                 self.drawing = False\n             self.drawing = False\n             \n-def renderKinematics(iterations)\n+def renderKinematics(iterations):\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:29 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,7 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n+    for i in range(1, iterations + 1):\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -42,6 +42,7 @@\n             \n def renderKinematics(iterations):\n     for i in range(1, iterations + 1):\n+        self.drawDotAtPoint()\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -42,7 +42,8 @@\n             \n def renderKinematics(iterations):\n     for i in range(1, iterations + 1):\n-        self.drawDotAtPoint()\n+        self.drawDotAtPoint(\n+        )\n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -43,6 +43,7 @@\n def renderKinematics(iterations):\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n+        \n         )\n             \n def drawDotAtPoint(x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:52 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -43,7 +43,7 @@\n def renderKinematics(iterations):\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n-        \n+            \n         )\n             \n def drawDotAtPoint(x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:26:58 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -23,7 +23,7 @@\n                 self.pen_color = 'black'\n                 self.pen_size = 12 - i\n                 self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+                    \n                     sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n                 )\n                 \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:05 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -43,7 +43,7 @@\n def renderKinematics(iterations):\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n-            \n+            sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n         )\n             \n def drawDotAtPoint(x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,6 +44,7 @@\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+            \n         )\n             \n def drawDotAtPoint(x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:11 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -24,7 +24,7 @@\n                 self.pen_size = 12 - i\n                 self.pos = (\n                     \n-                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+                    \n                 )\n                 \n                 self.pen_size = 1 - i - 3\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:13 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -44,7 +44,7 @@\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-            \n+            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n         )\n             \n def drawDotAtPoint(x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:20 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -46,6 +46,7 @@\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n             sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n         )\n+        \n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:38 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -46,7 +46,6 @@\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n             sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n         )\n-        \n             \n def drawDotAtPoint(x, y, size):\n     self.drawing = False\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:39 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -9,7 +9,6 @@\n     \n     while True:        \n         if self.local_angle != globals.angle or self.local_charge != globals.charge:\n-            stage.clear_drawings()\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,6 +40,7 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n+    \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:42 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,6 +41,7 @@\n             \n def renderKinematics(iterations):\n     \n+    \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:42 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,8 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n-    \n+                stage.clear_drawings()\n+\n     \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -41,7 +41,6 @@\n             \n def renderKinematics(iterations):\n                 stage.clear_drawings()\n-\n     \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,7 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n-                stage.clear_drawings()\n+            stage.clear_drawings()\n     \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,7 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n-            stage.clear_drawings()\n+        stage.clear_drawings()\n     \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:43 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -40,7 +40,7 @@\n             self.drawing = False\n             \n def renderKinematics(iterations):\n-        stage.clear_drawings()\n+    stage.clear_drawings()\n     \n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:51 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -13,31 +13,6 @@\n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n             \n-            if globals.charge == 0:\n-                break\n-            \n-            for i in range(1, 6):\n-                self.drawing = False\n-                \n-                self.pen_color = 'black'\n-                self.pen_size = 12 - i\n-                self.pos = (\n-                    \n-                    \n-                )\n-                \n-                self.pen_size = 1 - i - 3\n-                self.pen_color = 'white'\n-                \n-                self.drawing = False\n-                \n-                self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-                )\n-                \n-                self.drawing = False\n-            self.drawing = False\n             \n def renderKinematics(iterations):\n     stage.clear_drawings()\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:57 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,8 +12,7 @@\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n-            \n-            \n+                        \n def renderKinematics(iterations):\n     stage.clear_drawings()\n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:27:57 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -12,7 +12,33 @@\n             \n             self.local_angle = globals.angle;\n             self.local_charge = globals.charge;\n-                        \n+            \n+            if globals.charge == 0:\n+                break\n+            \n+            for i in range(1, 6):\n+                self.drawing = False\n+                \n+                self.pen_color = 'black'\n+                self.pen_size = 12 - i\n+                self.pos = (\n+                    \n+                    \n+                )\n+                \n+                self.pen_size = 1 - i - 3\n+                self.pen_color = 'white'\n+                \n+                self.drawing = False\n+                \n+                self.pos = (\n+                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n+                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+                )\n+                \n+                self.drawing = False\n+            self.drawing = False\n+            \n def renderKinematics(iterations):\n     stage.clear_drawings()\n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:00 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,28 +16,6 @@\n             if globals.charge == 0:\n                 break\n             \n-            for i in range(1, 6):\n-                self.drawing = False\n-                \n-                self.pen_color = 'black'\n-                self.pen_size = 12 - i\n-                self.pos = (\n-                    \n-                    \n-                )\n-                \n-                self.pen_size = 1 - i - 3\n-                self.pen_color = 'white'\n-                \n-                self.drawing = False\n-                \n-                self.pos = (\n-                    sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-                    sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n-                )\n-                \n-                self.drawing = False\n-            self.drawing = False\n             \n def renderKinematics(iterations):\n     stage.clear_drawings()\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -15,6 +15,7 @@\n             \n             if globals.charge == 0:\n                 break\n+                \n             \n             \n def renderKinematics(iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,6 +16,7 @@\n             if globals.charge == 0:\n                 break\n                 \n+            self.render\n             \n             \n def renderKinematics(iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:06 2025", 
+      "msg": {
+        "type": "text::completion", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,7 @@\n             if globals.charge == 0:\n                 break\n                 \n-            self.render\n+            self.renderKinematics\n             \n             \n def renderKinematics(iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:21 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,7 @@\n             if globals.charge == 0:\n                 break\n                 \n-            self.renderKinematics\n+            self.renderKinematics(sprite.x_pos, sprite.y_pos, 6)\n             \n             \n def renderKinematics(iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:21 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:28 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 131, in wrapped\n    fn(*args, **kwargs)\n    ~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 161, in wrapped\n    return f(*args, **kwargs)\n  File \"<stdin>\", line 122, in my_onstart\nTypeError: aimingDots.renderKinematics() takes 1 positional argument but 4 were given"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:48 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,7 @@\n             if globals.charge == 0:\n                 break\n                 \n-            self.renderKinematics(sprite.x_pos, sprite.y_pos, 6)\n+            self.renderKinematics(6)\n             \n             \n def renderKinematics(iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:48 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:49 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:28:56 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 131, in wrapped\n    fn(*args, **kwargs)\n    ~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 161, in wrapped\n    return f(*args, **kwargs)\n  File \"<stdin>\", line 122, in my_onstart\nTypeError: aimingDots.renderKinematics() takes 1 positional argument but 2 were given"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -19,7 +19,7 @@\n             self.renderKinematics(6)\n             \n             \n-def renderKinematics(iterations):\n+def renderKinematics(self, iterations):\n     stage.clear_drawings()\n     \n     for i in range(1, iterations + 1):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -28,7 +28,7 @@\n             sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n         )\n             \n-def drawDotAtPoint(x, y, size):\n+def drawDotAtPoint(self, x, y, size):\n     self.drawing = False\n     self.pen_color = 'black'\n     self.pen_size = size\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:11 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:11 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:18 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 131, in wrapped\n    fn(*args, **kwargs)\n    ~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ryanl\\PycharmProjects\\plane-game\\.venv\\Lib\\site-packages\\netsblox\\graphical.py\", line 161, in wrapped\n    return f(*args, **kwargs)\n  File \"<stdin>\", line 122, in my_onstart\n  File \"<stdin>\", line 129, in renderKinematics\nTypeError: aimingDots.drawDotAtPoint() missing 1 required positional argument: 'size'"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:31 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -25,7 +25,7 @@\n     for i in range(1, iterations + 1):\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n-            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2)\n+            sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2),\n         )\n             \n def drawDotAtPoint(self, x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,7 @@\n         self.drawDotAtPoint(\n             sprite.x_pos + math.cos(self.local_angle) * self.local_charge * i,\n             sprite.y_pos + math.sin(self.local_angle) * self.local_charge * i + (0.5) * (-9.8) * (i ** 2),\n+            12 - i\n         )\n             \n def drawDotAtPoint(self, x, y, size):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:40 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:29:41 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:30:05 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:30:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -42,7 +42,7 @@\n     self.drawing = False\n     self.drawing = False\n     self.pen_color = 'white'\n-    self.pen_size = size - 1\n+    self.pen_size = size - 2\n     self.pos = (x, y)\n     \n     self.drawing = True\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:30:26 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:03 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:03 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:14 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "aimingDots"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -16,7 +16,7 @@\n             if globals.charge == 0:\n                 break\n                 \n-            self.renderKinematics(6)\n+            self.renderKinematics(5)\n             \n             \n def renderKinematics(self, iterations):\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:18 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:20 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:31:47 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:26 2025", 
+      "msg": {
+        "type": "text::copy", 
+        "editor": "aimingDots", 
+        "content": "stage.clear_drawings()"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:31 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -14,6 +14,7 @@\n             self.local_charge = globals.charge;\n             \n             if globals.charge == 0:\n+                \n                 break\n                 \n             self.renderKinematics(5)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:31 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "aimingDots", 
+        "diff": "--- \n+++ \n@@ -14,7 +14,7 @@\n             self.local_charge = globals.charge;\n             \n             if globals.charge == 0:\n-                \n+                stage.clear_drawings()\n                 break\n                 \n             self.renderKinematics(5)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:33 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:34 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:44 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b9151f6a", 
+      "time": "Mon Sep 15 11:32:45 2025", 
       "msg": {
         "type": "ide::save"
       }
