@@ -27,12 +27,12 @@
         {
           "type": "stage", 
           "name": "stage", 
-          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        print('mu')\n    \n@onstart()\ndef run(self):\n    step = 0.01\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(0.01)\n        \n    "
+          "value": "@onmouse('up')\ndef my_onup(self, x, y):\n    if(globals.launching):\n        globals.launching = False\n        globals.flying = True\n        nb.send_message('launched')\n        globals.speed = [(globals.charge) * np.cos(globals.angle), (globals.charge) * np.sin(globals.angle)]\n        globals.charge = 0\n        print('mu')\n    \n@onstart()\ndef run(self):\n    step = 0.01\n    grav = -9.81\n    ar = -7\n    while True:\n        if(globals.flying):\n            globals.speed[1] += grav * step\n            globals.speed[0] += ar * step\n            \n            globals.x += globals.speed[0]\n            globals.y += globals.speed[1]\n        time.sleep(step)\n"
         }, 
         {
           "type": "sprite", 
           "name": "sprite", 
-          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n    \n    while True:\n        npSpeed = np.array(globals.speed)\n        self.say(npSpeed)\n        \n        angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n        \n        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n            angle = 270 - angle\n        elif (npSpeed[0] < 0):\n            angle = 180 - angle\n        \n        self.heading = angle"
+          "value": "@onstart()\ndef my_onstart(self):\n    self.starting = (-425, 0)\n    self.pos = (self.starting[0], self.starting[1])    \n    pass\n    \n@onmouse('down')\ndef my_onmouse(self, x, y):\n    globals.flying = False\n    globals.launching = True\n    while(not globals.flying):  \n        globals.charge = np.min([100, np.sqrt((self.starting[0] - stage.mouse_pos[0])**2 + (self.starting[1] - stage.mouse_pos[1])**2)])\n        globals.angle = np.pi + np.arctan2(stage.mouse_pos[1] - self.starting[1], stage.mouse_pos[0] - self.starting[0])\n        if np.abs(self.starting[0] - stage.mouse_pos[0]) < 30 and np.abs(self.starting[1] - stage.mouse_pos[1]) < 30:\n            self.pos = (stage.mouse_pos[0], stage.mouse_pos[1])\n        else:\n            self.pos = (self.starting[0] - np.cos(globals.angle) * 30, -np.sin(globals.angle) * 30)\n        self.heading = 90 - np.rad2deg(globals.angle)\n        self.say(np.round(globals.charge))\n\n    \n@nb.on_message('launched')\ndef my_on_message(self):\n    self.say('GO', duration = .0125)\n    \n    while True:\n        npSpeed = np.array(globals.speed)\n        \n        npSpeed = npSpeed / np.linalg.norm(npSpeed)\n                \n        angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n        \n        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n            angle += 180\n        elif (npSpeed[0] < 0):\n            angle += 180\n                    \n        self.heading = 90 - angle"
         }
       ], 
       "images": {}, 
@@ -10716,6 +10716,1172 @@
       "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
       "session_id": "b182f335", 
       "time": "Mon Sep 15 12:40:01 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:13 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep(0.01)\n+        time.sleep()\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -19,6 +19,6 @@\n             globals.speed[0] += ar * step\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n-        time.sleep()\n+        time.sleep(step)\n         \n     \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:19 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:22 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -20,5 +20,3 @@\n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n         time.sleep(step)\n-        \n-    \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:22 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:24 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:51 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:41:53 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:42:34 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:43:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "stage", 
+        "diff": "--- \n+++ \n@@ -17,6 +17,7 @@\n         if(globals.flying):\n             globals.speed[1] += grav * step\n             globals.speed[0] += ar * step\n+            \n             globals.x += globals.speed[0]\n             globals.y += globals.speed[1]\n         time.sleep(step)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:43:39 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "globals"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:43:40 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "stage"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:43:40 2025", 
+      "msg": {
+        "type": "ide::switch-editor", 
+        "editor": "sprite"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:07 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:30 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -25,6 +25,7 @@\n     \n     while True:\n         npSpeed = np.array(globals.speed)\n+        \n         self.say(npSpeed)\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:39 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,6 +26,7 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         \n+        \n         self.say(npSpeed)\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:40 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,6 +27,7 @@\n         npSpeed = np.array(globals.speed)\n         \n         \n+        \n         self.say(npSpeed)\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -26,7 +26,7 @@\n     while True:\n         npSpeed = np.array(globals.speed)\n         \n-        \n+        npSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n         self.say(npSpeed)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:44:53 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:45:19 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:45:21 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:18 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:21 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 270 - angle\n+        #    angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:22 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n         \n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n-        elif (npSpeed[0] < 0):\n+        #elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,6 @@\n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n-            angle = 180 - angle\n+        #    angle = 180 - angle\n         \n         self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:25 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:47:26 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:48:09 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:48:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         #elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n         \n-        self.heading = angle\n+        self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:48:28 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:48:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-        #    angle = 270 - angle\n+            angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:48:34 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        #elif (npSpeed[0] < 0):\n+        elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:49:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,6 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n-        #    angle = 180 - angle\n+            angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:49:41 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:50:16 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:50:18 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:50:55 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:50:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:00 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 270 - angle\n+        #    angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:00 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n         \n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n-        elif (npSpeed[0] < 0):\n+        #elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,6 @@\n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n-            angle = 180 - angle\n+        #    angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:03 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:32 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n         #    angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:37 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-        #    angle = 270 - angle\n+            angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:37 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:51:57 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,7 +34,7 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n-        #elif (npSpeed[0] < 0):\n+        elif (npSpeed[0] < 0):\n         #    angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:05 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,6 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n-        #    angle = 180 - angle\n+            angle = 180 - angle\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:05 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:28 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = 90 - angle\n+        self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:52:43 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:53:21 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:26 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle\n+        self.heading = angle + 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:26 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:37 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:41 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle + 90\n+        self.heading = angle - 90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:41 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:51 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:53 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle - 90\n+        self.heading = angle  90\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:54 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle  90\n+        self.heading = angle \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:55 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle \n+        self.heading = angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:59 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -37,4 +37,4 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n         \n-        self.heading = angle\n+        self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:54:59 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:19 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:30 2025", 
+      "msg": {
+        "type": "text::cut", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -28,7 +28,6 @@\n         \n         npSpeed = npSpeed / np.linalg.norm(npSpeed)\n         \n-        self.say(npSpeed)\n         \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:32 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -27,8 +27,7 @@\n         npSpeed = np.array(globals.speed)\n         \n         npSpeed = npSpeed / np.linalg.norm(npSpeed)\n-        \n-        \n+                \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,5 +34,6 @@\n             angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n+            \n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:33 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,5 +35,6 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n+            \n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:33 2025", 
+      "msg": {
+        "type": "text::paste", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,7 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n-            \n+                    self.say(npSpeed)\n+\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:35 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,7 +35,7 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n-                    self.say(npSpeed)\n+                self.say(npSpeed)\n \n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:35 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,7 +35,7 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n-                self.say(npSpeed)\n+            self.say(npSpeed)\n \n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:35 2025", 
+      "msg": {
+        "type": "text::indent::decrease", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,7 +35,7 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n-            self.say(npSpeed)\n+        self.say(npSpeed)\n \n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:36 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -36,6 +36,5 @@\n             angle = 180 - angle\n             \n         self.say(npSpeed)\n-\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:43 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,6 @@\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n-        self.say(npSpeed)\n+        self.say(angle)\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:55:43 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:01 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:08 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 270 - angle\n+            #angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:11 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             #angle = 270 - angle\n         elif (npSpeed[0] < 0):\n-            angle = 180 - angle\n+            #angle = 180 - angle\n             \n         self.say(angle)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:11 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:11 2025", 
+      "msg": {
+        "type": "exception::user", 
+        "traceback": "  File \"<stdin>\", line 111\n    elif (npSpeed[0] < 0):\n    ^^^^\nIndentationError: expected an indented block after 'if' statement on line 109"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:11 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:21 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                 \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             #angle = 270 - angle\n         elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:25 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             #angle = 270 - angle\n-        elif (npSpeed[0] < 0):\n+        #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n         self.say(angle)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:25 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:56 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                 \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        #if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             #angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:58 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            #angle = 270 - angle\n+            #angle= 270 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:56:58 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            #angle= 270 - angle\n+            #angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:57:02 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            #angle = 270 - angle\n+            angle = 270 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:57:02 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:57:20 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:57:22 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:57:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:58:03 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 270 - angle\n+            angle = 180 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:58:03 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:58:36 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:58:44 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 180 - angle\n+            angle = 360 - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:58:44 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:59:30 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:59:32 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = 360 - angle\n+            angle =  - angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 12:59:35 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle =  - angle\n+            angle = angle\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:00:24 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = angle\n+            angle = \n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:00:28 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -31,7 +31,7 @@\n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n-            angle = \n+            angle += 180\n         #elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:00:28 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:01:07 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:01:08 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:01:26 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:01:28 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:01:58 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:00 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:10 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:13 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -32,7 +32,7 @@\n         \n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n-        #elif (npSpeed[0] < 0):\n+        elif (npSpeed[0] < 0):\n             #angle = 180 - angle\n             \n         self.say(angle)\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:14 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n         elif (npSpeed[0] < 0):\n-            #angle = 180 - angle\n+            angle = 180 - angle\n             \n         self.say(angle)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n         elif (npSpeed[0] < 0):\n-            angle = 180 - angle\n+            angle = 180 + angle\n             \n         self.say(angle)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:19 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:02:52 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:06 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                 \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n+        if ( :\n             angle += 180\n         elif (npSpeed[0] < 0):\n             angle = 180 + angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:06 2025", 
+      "msg": {
+        "type": "history::undo", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -30,7 +30,7 @@\n                 \n         angle = np.rad2deg(np.arctan(npSpeed[1] / npSpeed[0]))\n         \n-        if ( :\n+        if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n         elif (npSpeed[0] < 0):\n             angle = 180 + angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:10 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n         elif (npSpeed[0] < 0):\n-            angle = 180 + angle\n+            angle += 180 + angle\n             \n         self.say(angle)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:15 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -33,7 +33,7 @@\n         if (npSpeed[0] < 0 and npSpeed[1] < 0) :\n             angle += 180\n         elif (npSpeed[0] < 0):\n-            angle += 180 + angle\n+            angle += 180\n             \n         self.say(angle)\n         \n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:18 2025", 
+      "msg": {
+        "type": "text::delete", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -35,6 +35,5 @@\n         elif (npSpeed[0] < 0):\n             angle += 180\n             \n-        self.say(angle)\n         \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:19 2025", 
+      "msg": {
+        "type": "text::edit", 
+        "editor": "sprite", 
+        "diff": "--- \n+++ \n@@ -34,6 +34,5 @@\n             angle += 180\n         elif (npSpeed[0] < 0):\n             angle += 180\n-            \n-        \n+                    \n         self.heading = 90 - angle\n"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:19 2025", 
+      "msg": {
+        "type": "ide::save"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:03:25 2025", 
+      "msg": {
+        "type": "exec::start"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:04:07 2025", 
+      "msg": {
+        "type": "exec::stop"
+      }
+    }, 
+    {
+      "install_id": "1e2bd148-fad4-4050-b01d-ead1a9e40a23", 
+      "session_id": "b182f335", 
+      "time": "Mon Sep 15 13:04:09 2025", 
       "msg": {
         "type": "ide::save"
       }
