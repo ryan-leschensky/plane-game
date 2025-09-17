@@ -1,5 +1,9 @@
 # plane-game
 
+### Instructions
+
+To play, download and open the JSON file in PyBlocks. Then, after running the game, click and pull the plane back to launch. Try to rack up the highest score! Click R or click the plane in order to reset.
+
 ### Branches
 
 Whenever working on a new feature from the base game, create a new branch and then request to merge it when done so that
