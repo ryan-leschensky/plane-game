@@ -1,5 +1,9 @@
 # plane-game
 
+### About
+
+This project contains the code for a Pyblocks plane game. Try to get the highest score while bouncing amongst the clouds!
+
 ### Instructions
 
 To play, download and open the JSON file in PyBlocks. Then, after running the game, click and pull the plane back to launch. Try to rack up the highest score! Click R or click the plane in order to reset.
